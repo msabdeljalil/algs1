@@ -18,14 +18,15 @@
 public class PercolationStats {
    private int N;
    private int T;
-   private int openCount;
    private double[] testRuns;
 
    /**
    * Perform T independent experiments on an N-by-N grid
    */
    public PercolationStats(int n, int t) {
-      if (n <= 0 || t <= 0) throw new IllegalArgumentException("N and T must be > 0");
+      if (n <= 0 || t <= 0) {
+         throw new IllegalArgumentException("N and T must be > 0");
+      }
       N = n;
       T = t;
       double size = N*N;
