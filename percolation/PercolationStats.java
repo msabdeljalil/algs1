@@ -1,24 +1,42 @@
-import java.util.Random;
-
+/*************************************************************************
+*  Name:       Mohammad Abdeljalil
+*  Date:       Feb 4, 2015
+*  Purpose:    In completion of the requirements for programming assignment 
+*              one of Algorithms, Part 1
+*  Compilation:javac -classpath .:../algs4.jar:../stdlib.jar PercolationStats.java
+*  Execution:  java -classpath .:../algs4.jar:../stdlib.jar PercolationStats N T
+*
+*************************************************************************/
+/**
+ *  <i>Percolation statistics</i>. This class provides statistics
+ *  including as mean, sample standard deviation, and 95% confidence
+ *  interval for a series of runs of the Percolation class.
+ *  <p>
+ *
+ *  @author Mohammad Abdeljalil
+ */
 public class PercolationStats {
    private int N;
    private int T;
    private int openCount;
-   public double[] testRuns;
+   private double[] testRuns;
+
    /**
-   * perform T independent experiments on an N-by-N grid
+   * Perform T independent experiments on an N-by-N grid
    */
    public PercolationStats(int n, int t) {
+      if (n <= 0 || t <= 0) throw new IllegalArgumentException("N and T must be > 0");
       N = n;
       T = t;
       double size = N*N;
       testRuns = new double[T];
+
       for (int x=0; x<T; x++) {
          Percolation perc = new Percolation(N);
          int openCount = 0;
          while (perc.percolates() == false) {
-            int i = randInt(1,N);
-            int j = randInt(1,N);
+            int i = StdRandom.uniform(N)+1;
+            int j = StdRandom.uniform(N)+1;
             if (perc.isOpen(i,j) == false ) {
                perc.open(i,j);
                openCount++;
@@ -29,26 +47,18 @@ public class PercolationStats {
    }
 
    /**
-   * sample mean of percolation threshold
+   * Sample mean of percolation threshold
+   * @return the mean of the percolation test runs
    */
    public double mean() {
-      double sum = 0.0;
-      for (int i=0; i<testRuns.length; i++) {
-         sum += testRuns[i];
-      }
-      return (sum/testRuns.length);
+      return StdStats.mean(testRuns);
    }
 
    /**
    * sample standard deviation of percolation threshold
    */
    public double stddev() {
-      double avg = mean();
-      double sumSquares = 0;
-      for (int i=0; i<testRuns.length; i++) {
-         sumSquares += Math.pow(testRuns[i]-avg, 2);
-      }
-      return Math.sqrt(sumSquares/(T-1));
+      return StdStats.stddev(testRuns);
    }
 
    /**
@@ -70,15 +80,8 @@ public class PercolationStats {
    */
    public static void main(String[] args) {
       PercolationStats percTest = new PercolationStats( Integer.parseInt(args[0]), Integer.parseInt(args[1]) );
-      System.out.println( "Mean                    = " + percTest.mean() ); //=> ?
-      System.out.println( "StDev                   = " + percTest.stddev() ); //=> ?
+      System.out.println( "Mean                    = " + percTest.mean() );
+      System.out.println( "StDev                   = " + percTest.stddev() );
       System.out.println( "95% confidence interval = " + percTest.confidenceLo() + ", " + percTest.confidenceHi() );
-
-
-   }
-
-   private int randInt(int min, int max) {
-      // StdRandom.uniform(1,10)
-      return min + (int)(Math.random() * ((max - min) + 1));
    }
 }
