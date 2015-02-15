@@ -82,7 +82,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   // an iterator, doesn't implement remove() since it's optional
   private class ListIterator implements Iterator<Item> {
     private Node current = first;
-    private RandomizedQueue<Item> thing = this.;
     
     public boolean hasNext()  { return current != null;                     }
     public void remove()      { throw new UnsupportedOperationException();  }
