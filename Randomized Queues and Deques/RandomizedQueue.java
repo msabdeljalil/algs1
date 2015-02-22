@@ -60,8 +60,8 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   public Item dequeue() {
     checkEmptyStack();
 
-    int rand = StdRandom.uniform(1, size + 1);
     Node current = first;
+    int rand = StdRandom.uniform(1, size + 1);
 
     for (int i = 1; i < rand; i++) {
       if (current.next != null ) current = current.next;
@@ -82,7 +82,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   // an iterator, doesn't implement remove() since it's optional
   private class ListIterator implements Iterator<Item> {
     private Node current = first;
-    
     public boolean hasNext()  { return current != null;                     }
     public void remove()      { throw new UnsupportedOperationException();  }
 
@@ -118,7 +117,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
  }
 
   private void checkEmptyStack() {
-  if (size < 1) throw new NoSuchElementException("The deque is empty!");
+  if (size == 0) throw new NoSuchElementException("The deque is empty!");
  }
 
 }
