@@ -56,7 +56,7 @@ public class Point implements Comparable<Point> {
 
     // draw line between this point and that point to standard drawing
     public void drawTo(Point that) {
-        StdDraw.line(this.x, this.y, that.x, that.y);
+        StdDraw.line(x, y, that.x, that.y);
     }
 
     // return string representation of this point
@@ -70,7 +70,6 @@ public class Point implements Comparable<Point> {
         Point p2 = new Point(3,10);
         Point p3 = new Point(0,10);
         Point p4 = new Point(10,0);
-
 
         double temp1 = p2.slopeTo(p1);
         double temp2 = p3.slopeTo(p1);
