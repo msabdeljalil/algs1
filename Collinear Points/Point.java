@@ -24,9 +24,9 @@ public class Point implements Comparable<Point> {
     }
 
     // compare points by slope
-    public final Comparator<Point> SLOPE_ORDER = new BySlope();
+    public static final Comparator<Point> SLOPE_ORDER = new BySlope();
 
-    private class BySlope implements Comparator<Point> {
+    private static class BySlope implements Comparator<Point> {
         public int compare(Point p1, Point p2) { return p1.compareTo(p2); }
     }
 
