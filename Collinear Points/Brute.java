@@ -24,16 +24,16 @@ public class Brute {
         while (!in.isEmpty()) {
           points.add(new Point(in.readInt(), in.readInt()));
         }
-        Collections.sort(points, Point.SLOPE_ORDER);
+        Collections.sort(points, Point.COORD_ORDER);
 
-        int F = 0;
+        // int F = 0;
         for (int i = 0; i < points.size(); i++) {
             for (int j = i+1; j < points.size(); j++) {
                 for (int k = j+1; k < points.size(); k++) {
                     for (int l = k+1; l < points.size(); l++) {
-                        StdOut.println("::"+i+" "+j+" "+k+" "+l+" F: "+ ++F);
+                        // StdOut.println("::"+i+" "+j+" "+k+" "+l+" F: "+ ++F);
                         if (Brute.onSameLine(points.get(i), points.get(j), points.get(k), points.get(l) )) {
-                          drawAndPrintConnectedPoints(points);
+                          drawAndPrintConnectedPoints( points.get(i), points.get(j), points.get(k), points.get(l) );
                         }
                     }
                 }

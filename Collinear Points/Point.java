@@ -25,13 +25,27 @@ public class Point implements Comparable<Point> {
 
     // compare points by slope
     public static final Comparator<Point> SLOPE_ORDER = new BySlope();
-
     private static class BySlope implements Comparator<Point> {
+        public int compare(Point p1, Point p2) { return (int)p1.compareSlopeTo(p2); }
+    }
+
+    public static final Comparator<Point> COORD_ORDER = new ByCoord();
+    private static class ByCoord implements Comparator<Point> {
         public int compare(Point p1, Point p2) { return p1.compareTo(p2); }
     }
 
+
     // slope between this point and that point
     public double slopeTo(Point that) {
+        double temp = (double)(that.y - this.y) / (double)(that.x - this.x);
+        if (temp == Double.NEGATIVE_INFINITY) { return Double.POSITIVE_INFINITY;}
+        if (temp == -0.0) { return 0.0;}
+        if (temp == Double.NaN) { return Double.NEGATIVE_INFINITY;}
+        return temp;
+    }
+
+    // slope between this point and that point
+    public double compareSlopeTo(Point that) {
         double temp = (double)(that.y - this.y) / (double)(that.x - this.x);
         if (temp == Double.NEGATIVE_INFINITY) { return Double.POSITIVE_INFINITY;}
         if (temp == -0.0) { return 0.0;}
